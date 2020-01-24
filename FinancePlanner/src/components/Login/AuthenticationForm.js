@@ -12,14 +12,14 @@ export default class AuthenticationForm extends Component {
     }
 
     checkCredentials = () => {
-        // if((this.state.username) && (this.state.password)){
-        //     if((this.state.username === 'admin') && (this.state.password === 'pass')){
+        if((this.state.username) && (this.state.password)){
+            if((this.state.username === 'admin') && (this.state.password === 'pass')){
                 this.props.propData.navigation.navigate('Accounts')
-        //     }
-        // }
-        // else{
-        //     Alert.alert('Invalid Credentials!')
-        // }
+            }
+        }
+        else{
+            Alert.alert('Invalid Credentials!')
+        }
     }
 
     render(){

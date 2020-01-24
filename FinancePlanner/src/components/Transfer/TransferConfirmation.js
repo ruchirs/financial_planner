@@ -17,7 +17,7 @@ export default class TransferConfirmation extends Component {
      }
 
     render(){
-        console.log('this.props123', this.props.propData.navigation)
+        console.log('this.props123', this.props.stateValues)
         return (
             <KeyboardAvoidingView behavior='padding' style={confirmationStyles.container}>
                 <View>
@@ -47,7 +47,7 @@ export default class TransferConfirmation extends Component {
                         </TouchableHighlight>
 
                         <TouchableHighlight style={confirmationStyles.confirm}
-                            onPress={() => this.props.propData.navigation.navigate('Summary', this.props)}>
+                            onPress={() => this.props.propData.navigation.navigate('Summary', {propsValue:this.props.stateValues, currentState:this.state})}>
                             <Text style={confirmationStyles.confirmText}>Proceed</Text>
                         </TouchableHighlight>
                     </View>
@@ -77,8 +77,7 @@ const confirmationStyles = StyleSheet.create({
 
     text: {
         marginBottom: 15,
-        fontSize: 15,
-        // color: '#FFF'
+        fontSize: 15
     },
 
     period: {

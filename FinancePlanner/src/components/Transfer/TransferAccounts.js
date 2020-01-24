@@ -56,6 +56,7 @@ const accountStyles = StyleSheet.create({
     },
 
     tiles: {
+        marginTop: 30,
         marginLeft: 100,
         flexDirection: 'row',
         width: 250,
@@ -70,7 +71,6 @@ const accountStyles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 70,
         color: '#FFF'
-        // marginHorizontal: 100
     },
 
     tilesBorder: {

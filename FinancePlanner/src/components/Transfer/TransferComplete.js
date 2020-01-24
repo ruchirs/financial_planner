@@ -3,10 +3,20 @@ import { StyleSheet, View, Image, Text, KeyboardAvoidingView, Button } from 'rea
 import General from '../enums/general'
 import { TouchableHighlight } from 'react-native-gesture-handler'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-// import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+
 
 export default class TransferComplete extends Component {
 
+    //Random Unique ID Generator
+    guidGenerator = () => {
+        var S4 = function() {
+           return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+        };
+        console.log(S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4())
+        return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4());
+    }
+
+    
     render(){
         return (
             <KeyboardAvoidingView behavior='padding' style={profileStyles.container}>
@@ -14,7 +24,7 @@ export default class TransferComplete extends Component {
                     <Image style={profileStyles.logo}
                         source={require('../images/check.png')} />
                     <Text style={profileStyles.textStyle}>{General.complete}</Text>
-                    <Text style={profileStyles.textStyle}>ref ID: 22333222233</Text>
+                    <Text style={profileStyles.textStyle}>ref ID: {this.guidGenerator()}</Text>
                     <View style={{flexDirection: 'row', marginTop: 20}}>
                         <View style={profileStyles.iconContainer}>
                             <View style={{justiftyContent:"center", alignItems:"center"}}><FontAwesomeIcon icon="search" size={40} color={"#FFF"} /></View>

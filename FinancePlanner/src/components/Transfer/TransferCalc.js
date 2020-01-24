@@ -8,7 +8,7 @@ export default class TransferCalc extends Component {
     constructor(props){
         super(props)
         this.state = {
-            amount: 0.00
+            amount: ""
         }
     }
 
@@ -19,7 +19,7 @@ export default class TransferCalc extends Component {
         return (
             <TouchableOpacity 
                 style={NumPadStyles.button} key={number} 
-                onPress={(number == 'ok')?() => this.props.changeView(true):() => this._handlePress({number})}>
+                onPress={(number == 'ok')?() => this.props.changeView(true, this.state.amount):() => this._handlePress({number})}>
                     <Text style={NumPadStyles.buttonText} title={number}>
                         {number}</Text>
             </TouchableOpacity>)
@@ -29,21 +29,42 @@ export default class TransferCalc extends Component {
 
     _handlePress = (val) => {
         console.log('val', val.number)
+        let newValue, src, currentNum
         if(val.number){
-
-            // let value = (value == '' || null || undefined)? 0 : value
-            // value = value.concat(val.number)
-            // this.setState({amount: val.number})
+            if(val.number === 'x'){ // check if it's a number or remove option
+                if((this.state.amount > 0)){ // check if the number can be deleted
+                        src = this.state.amount
+                    if(src.length > 1){ // delete only if number length is greater than 1
+                        newValue = src.substr(0, src.length - 1)
+                        this.setState({amount: newValue})
+                    }
+                    else{
+                        this.setState({amount: ''}) // else remove null
+                    }
+                }
+                else {
+                    return
+                }
+            }
+            else {
+                if(this.state.amount.length < 7){       //amount till 7 digits will be taken
+                    currentNum = val.number
+                    src = this.state.amount
+                    newValue = src.concat(currentNum)
+                    this.setState({amount: newValue})
+                    console.log('newValue', newValue)
+                }
+                else{                                   //above 7 units will be returned
+                    return
+                }
+            }
         }
     }
 
     render(){
-        console.log('this.props', this.props)
         return (
             <KeyboardAvoidingView behavior='padding' style={NumPadStyles.container}>
-                <TouchableHighlight style={NumPadStyles.amountAlignment}>
-                    <Text style={NumPadStyles.amountText}>{this.state.amount}</Text>
-                </TouchableHighlight>
+                <Text style={NumPadStyles.amountText}>{this.state.amount}</Text>
                 
                 <View style={NumPadStyles.numpadArea}>
                     {this.getButtonsUsingMap()}
@@ -57,10 +78,7 @@ export default class TransferCalc extends Component {
 const NumPadStyles = StyleSheet.create({
     container: {
         backgroundColor: '#89cff0',
-        flex: 1,
-        flexDirection: 'row',
-        
-        
+        flex: 1       
     },
     
     buttonText: {
@@ -79,8 +97,6 @@ const NumPadStyles = StyleSheet.create({
         paddingHorizontal: 15,
         paddingVertical: 5,
         borderColor: '#FFF'
-        
-
     },
 
     numpadArea: {
@@ -88,18 +104,16 @@ const NumPadStyles = StyleSheet.create({
         flexDirection: 'row',
         marginLeft: 50,
         width: 320,
-        // backgroundColor: 'white',
         flexWrap: 'wrap'
     },
 
     amountText: {
-        fontSize: 30,
-        flexDirection: 'row'
+        fontSize: 20,
+        textAlign: 'center'
     },
 
     amountAlignment: {
         flexDirection: 'row',
-        // justifyContent: 'center',
         backgroundColor: 'grey'
     }
 })
