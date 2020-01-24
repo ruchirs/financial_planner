@@ -1,7 +1,26 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, StatusBar } from 'react-native'
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, StatusBar, Alert } from 'react-native'
 
 export default class AuthenticationForm extends Component {
+
+    constructor(props){
+        super(props)
+        this.state={
+            username: '',
+            password: ''
+        }
+    }
+
+    checkCredentials = () => {
+        // if((this.state.username) && (this.state.password)){
+        //     if((this.state.username === 'admin') && (this.state.password === 'pass')){
+                this.props.propData.navigation.navigate('Accounts')
+        //     }
+        // }
+        // else{
+        //     Alert.alert('Invalid Credentials!')
+        // }
+    }
 
     render(){
         return (
@@ -17,7 +36,8 @@ export default class AuthenticationForm extends Component {
                 onSubmitEditing={() => this.passwordInput.focus()}
                 keyboardType="email-address"
                 autoCapitalize="none"
-                autoCorrect={false}/>
+                autoCorrect={false}
+                onChangeText={(username) => this.setState({username})}/>
                 
                 <TextInput 
                 style={loginStyles.input} 
@@ -25,10 +45,13 @@ export default class AuthenticationForm extends Component {
                 placeholderTextColor="rgba(255, 255, 255, 0.9)" 
                 secureTextEntry 
                 returnKeyType="go" 
-                ref={(input) => this.passwordInput = input}/>
+                ref={(input) => this.passwordInput = input}
+                onChangeText={(password) => this.setState({password})}
+                onSubmitEditing={() => this.checkCredentials()}/>
+
 
                 <TouchableOpacity style={loginStyles.buttonContainer}>
-                    <Text style={loginStyles.buttonText}>LOGIN</Text>
+                    <Text style={loginStyles.buttonText} onPress={() => this.checkCredentials()}>LOGIN</Text>
                 </TouchableOpacity>
             </View>
         )}

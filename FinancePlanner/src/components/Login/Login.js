@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, Text, KeyboardAvoidingView } from 'react-native'
 import AuthForm from './AuthenticationForm'
+import SafeAreaView from 'react-native-safe-area-view';
+
 
 export default class Login extends Component {
 
@@ -14,9 +16,8 @@ export default class Login extends Component {
                 </View>
 
                 <View style={styles.formContainer}>
-                    <AuthForm />
+                    <AuthForm propData={this.props}/>
                 </View>
-
             </KeyboardAvoidingView>
         )
     }
@@ -25,7 +26,7 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#40e0d0'
+        backgroundColor: '#89cff0'
     },
 
     logoContainer: {
