@@ -20,9 +20,19 @@ export default class TransferInitial extends Component {
             toBalance: '',
             toType: '',
             source: '',
-            propAmount: ''
+            propAmount: '',
+            transferMode: ''
         }
     }
+
+    componentDidMount(){
+        if(this.state.transferMode == ''){
+            const { navigation } = this.props;
+            let transferModeProps = navigation.getParam('mode', 'default value')
+            this.setState({transferMode: transferModeProps})
+        }
+    }
+    
 
     setModalVisible(visible, src) {
         this.setState({modalVisible: visible, source: src});
@@ -34,7 +44,6 @@ export default class TransferInitial extends Component {
 
     getRecord = (record) => {
         let src = this.state.source
-        console.log('src', src)
         if(src === 'from')
         this.setState({fromAccount: record.AccountNo, fromBalance: record.balance, modalVisible: !this.state.modalVisible, fromType: record.type})
         else if(src === 'to')
@@ -42,6 +51,7 @@ export default class TransferInitial extends Component {
     }
 
     render(){
+        
         return (
             <KeyboardAvoidingView behavior='padding' style={initialStyles.container}>
                 

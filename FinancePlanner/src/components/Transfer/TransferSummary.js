@@ -8,10 +8,8 @@ export default class TransferSummary extends Component {
         
         const { navigation } = this.props;
         let propData =  navigation.getParam('propsValue', 'default value')
-        console.log('propData', propData)
         let parentState = navigation.getParam('currentState', 'default value')
-        console.log('parentState', parentState)
-        
+              
         return (
             <KeyboardAvoidingView behavior='padding' style={summaryStyles.container}>
                 <View>
@@ -36,7 +34,7 @@ export default class TransferSummary extends Component {
 
                     <View style={summaryStyles.information}>
                         <View style={summaryStyles.contentContainer}>
-                            <Text style={summaryStyles.textContent}>Scheduled Date</Text>
+                            <Text style={summaryStyles.textContent}>Schedule Date-</Text>
                             <View style={summaryStyles.dimension}>
                                 <Text style={summaryStyles.textValue}>{(parentState.switchValue == true)?'Today': 'Later'}</Text>
                             </View>
@@ -50,9 +48,9 @@ export default class TransferSummary extends Component {
                         </View>
 
                         <View style={summaryStyles.contentContainer}>
-                            <Text style={summaryStyles.textContent}>Receipient Reference</Text>
+                            <Text style={summaryStyles.textContent}>Reference Type-</Text>
                             <View style={summaryStyles.dimension}>
-                                <Text style={summaryStyles.textValue}></Text>
+                                <Text style={summaryStyles.textValue}>{propData.transferMode}</Text>
                             </View>
                         </View>
 
@@ -66,7 +64,7 @@ export default class TransferSummary extends Component {
 
                     <View style={summaryStyles.buttons}>
                         <TouchableHighlight style={summaryStyles.cancel} 
-                        onPress={() => this.props.changeView(false)}>
+                        onPress={() => this.props.navigation.navigate('Initial', this.props)}>
                             <Text style={summaryStyles.confirmText}>Cancel</Text>
                         </TouchableHighlight>
 

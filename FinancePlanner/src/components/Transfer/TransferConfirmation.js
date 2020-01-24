@@ -12,12 +12,10 @@ export default class TransferConfirmation extends Component {
     }
 
     toggleSwitch = (value) => {
-        console.log('value', value)
         this.setState({switchValue: value})
      }
 
     render(){
-        console.log('this.props123', this.props.stateValues)
         return (
             <KeyboardAvoidingView behavior='padding' style={confirmationStyles.container}>
                 <View>

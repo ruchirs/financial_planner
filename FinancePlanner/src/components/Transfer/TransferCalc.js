@@ -28,7 +28,6 @@ export default class TransferCalc extends Component {
       }
 
     _handlePress = (val) => {
-        console.log('val', val.number)
         let newValue, src, currentNum
         if(val.number){
             if(val.number === 'x'){ // check if it's a number or remove option
@@ -52,7 +51,6 @@ export default class TransferCalc extends Component {
                     src = this.state.amount
                     newValue = src.concat(currentNum)
                     this.setState({amount: newValue})
-                    console.log('newValue', newValue)
                 }
                 else{                                   //above 7 units will be returned
                     return

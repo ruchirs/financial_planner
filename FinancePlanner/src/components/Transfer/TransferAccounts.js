@@ -14,7 +14,7 @@ export default class TransferAccounts extends Component {
                 </View>
 
                 <View style={accountStyles.tiles}>
-                    <TouchableOpacity styles={accountStyles.tilesBorder} onPress={() => this.props.navigation.navigate('Initial')}>
+                    <TouchableOpacity styles={accountStyles.tilesBorder} onPress={() => this.props.navigation.navigate('Initial', {mode: 'Own acc Transfer'})}>
                         <View style={{justiftyContent:"center", alignItems:"center"}}><FontAwesomeIcon icon="retweet" size={40} color={'#FFF'}/></View>
                         <Text style={accountStyles.tilesText}>Own Account Transfer</Text>
                     </TouchableOpacity>
